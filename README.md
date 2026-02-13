@@ -1,6 +1,6 @@
 # MovieSeat
 
-## Ett simpelt react projekt där man kan boka sätten till några filmer.
+## Ett simpelt react projekt där man kan boka säten till några filmer.
 
 ## Tekniker som använts
 React - aplikationens struktur och komponentbaserade logik
