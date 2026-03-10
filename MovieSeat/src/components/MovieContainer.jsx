@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-import moviesData from "/Json/movies.json";
 
 function MovieContainer({ onMovieChange, onPriceChange }) {
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        fetch("/movies.json")
+            .then(res => res.json())
+            .then(data => setMovies(data));
+    }, []);
+
     const handleMovieChange = (e) => {
         const title = e.target.value;
-
-        if (title === "") {
-            onMovieChange(null);
-            onPriceChange(0);
-            return;
-        }
-
-        const movie = moviesData.find(m => m.Title === title) || null;
+        const movie = movies.find(m => m.Title === title);
 
         onMovieChange(movie);
         onPriceChange(movie ? movie.Price : 0);
@@ -21,8 +21,8 @@ function MovieContainer({ onMovieChange, onPriceChange }) {
         <div className="movie-container">
             <label htmlFor="movie">Pick a movie:</label>
             <select name="movie" id="movie" onChange={handleMovieChange}>
-                <option value="0">Select a movie</option>
-                {moviesData.map(movie => (
+                <option value="">Select a movie</option>
+                {movies.map(movie => (
                     <option key={movie.Title} value={movie.Title}
                     > {movie.Title} ({movie.Price} kr)
                     </option>
