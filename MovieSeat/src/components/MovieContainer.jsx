@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Movie from "../models/Movie";
 
 function MovieContainer({ onMovieChange, onPriceChange }) {
     const [movies, setMovies] = useState([]);
@@ -6,7 +7,7 @@ function MovieContainer({ onMovieChange, onPriceChange }) {
     useEffect(() => {
         fetch("/movies.json")
             .then(res => res.json())
-            .then(data => setMovies(data));
+            .then(data => setMovies(data.map(m => new Movie(m.Title, m.Year, m.Price, m.Poster, m.seats))));
     }, []);
 
     const handleMovieChange = (e) => {

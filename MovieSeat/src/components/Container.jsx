@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 function Container({ seats, selectedSeats, onSeatsChange, occupiedSeats, selectedPrice }) {
 
   const handleSeatClick = (rowIdx, seatIdx) => {
